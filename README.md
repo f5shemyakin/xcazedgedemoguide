@@ -2,7 +2,7 @@
 
 # Table of Contents
 
-- [F5 Edge Compute and Enterprise Networking with F5 Distributed Cloud Services (using Azure Site)](#f5-edge-compute-and-enterprise-networking-with-f5-distributed-cloud-services-using-azure-site)
+- [F5 Edge Compute and Enterprise Networking with F5 Distributed Cloud App Stack (on Azure)](#f5-edge-compute-and-enterprise-networking-with-f5-distributed-cloud-services-using-azure-site)
 - [Table of Contents](#table-of-contents)
 - [Objective](#objective)
 - [Scenario](#scenario)
@@ -38,7 +38,7 @@
 
 # Objective
 
-This guide, along with the provided scripts and sample app & services, is designed to help explore and demonstrate the use-cases of F5 Distributed Cloud Services through the lens of the key strategic solution area -- **Hybrid Multicloud App Delivery** for seamlessly deploying app components across clouds, branch, and edge. The below guide focuses on Azure VNET site-specific deployments and configurations of _Edge Compute_ with F5 Distributed Cloud AppStack and _Multi-Cloud Networking (MCN)_ with F5 Distributed Cloud App Connect.
+This guide, along with the provided scripts and sample app & services, is designed to help explore and demonstrate the use-cases of F5 Distributed Cloud Services through the lens of the key strategic solution area -- **Hybrid Multicloud App Delivery** for seamlessly deploying app components across clouds, branch, and edge. The below guide focuses on Azure VNET site-specific deployments and configurations of _Edge Compute_ with **F5 Distributed Cloud AppStack** and _Multi-Cloud Networking (MCN)_ with **F5 Distributed Cloud App Connect**.
 
 You can use the steps and the included scripts to deploy the WooCommerce sample app, which represents a traditional 3-tier app architecture (backend + database + frontend). With F5 Distributed Cloud Services, you can easily deploy and securely network these app services to create a distributed app model that spans across:
 
