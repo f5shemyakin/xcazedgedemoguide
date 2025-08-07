@@ -1,4 +1,4 @@
-# F5 Edge Compute and Enterprise Networking with F5 Distributed Cloud Services (using Azure Site)
+# F5 Edge Compute and Enterprise Networking with F5 Distributed Cloud App Stack (on Azure)
 
 # Table of Contents
 
