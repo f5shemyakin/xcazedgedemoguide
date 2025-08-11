@@ -397,7 +397,7 @@ To create a new origin pool, open the **Origin Pool** menu and click **Add Item*
 
 Give origin pool a name.
 
-![alt text](assets/httplb-recommendations_6.png)
+![alt text](assets/httplb-recommendations-6.png)
 
 To create a new origin server, click **Add Item**.
 
