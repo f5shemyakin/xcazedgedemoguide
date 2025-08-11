@@ -2,7 +2,7 @@
 
 # Table of Contents
 
-- [F5 Edge Compute and Enterprise Networking with F5 Distributed Cloud App Stack (on Azure)](#f5-edge-compute-and-enterprise-networking-with-f5-distributed-cloud-services-using-azure-site)
+- [F5 Edge Compute and Enterprise Networking with F5 Distributed Cloud App Stack (on Azure)](#f5-edge-compute-and-enterprise-networking-with-f5-distributed-cloud-app-stack-on-azure)
 - [Table of Contents](#table-of-contents)
 - [Objective](#objective)
 - [Scenario](#scenario)
@@ -205,12 +205,7 @@ Enter a name and proceed to the labels. Type in **location** for the custom key 
 
 ![alt text](assets/ce-site-azure-2.png)
 
-TBD
-
-Next, we will configure site type. First, enter your Azure resource group **azure-ce-branch-a** for resources that will be created. Ensure that you enter a name for a non-existent resource group. With the **Recommended Azure Region Name** option selected by default, go on and select **centralus** for this demo.
-From the **Vnet** menu, select **New Vnet Parameters** and then **Autogenerate Vnet Name**.
-After that, enter the **172.24.0.0/16** CIDR in the IPv4 CIDR block field.
-From the **Select Ingress Gateway or Ingress/Egress Gateway** menu, select the **Ingress Gateway (One Interface) on Recommended Region** option which is useful when the site is used as ingress/egress gateway to the VPC. Click **Configure** to open the two-interface node configuration.
+Next, we will configure site type. First, select your cloud credentials. Then pick your Azure resource group **azure-ce-branch-a** for resources that will be created. Ensure that you enter a name for a non-existent resource group. With the **Recommended Azure Region Name** option selected by default, go on and select **centralus** for this demo. Enter the **172.24.0.0/16** CIDR in the IPv4 CIDR block field. From the **Select Ingress Gateway or Ingress/Egress Gateway** menu, select the **Ingress/Egress Gateway (Two Interface) on Recommended Region** option. Click **Configure** to open the two-interface node configuration.
 
 ![alt text](assets/ce-site-azure-3.png)
 
@@ -218,9 +213,7 @@ Click **Add Item** to add a node.
 
 ![alt text](assets/ce-site-azure-4.png)
 
-From the **Azure AZ name** menu, select **1** to set the number of availability zones.
-Then go on to configure **Subnet for Inside Interface** by entering the **172.24.10.0/24** subnet in the IPv4 Subnet field.
-And finally, in the **Subnet for Outside Interface** menu fill in the **172.24.20.0/24** subnet in the IPv4 Subnet field. Complete configuring the node by clicking the **Apply** button.
+From the **Azure AZ name** menu, select **1** to set the number of availability zones. Then go on to configure **Subnet for Inside Interface** by entering the **172.24.10.0/24** subnet in the IPv4 Subnet field. And finally, in the **Subnet for Outside Interface** menu fill in the **172.24.20.0/24** subnet in the IPv4 Subnet field. Complete configuring the node by clicking the **Apply** button.
 
 ![alt text](assets/ce-site-azure-5.png)
 
@@ -228,19 +221,15 @@ Take a look at the node configuration and click the **Apply** button to proceed.
 
 ![alt text](assets/ce-site-azure-6.png)
 
-Back on the Azure VNET Site configuration page, navigate to the **Cloud Credentials** and select the **system/azure-creds** for automatic deployment.
-
-![alt text](assets/ce-site-azure-7.png)
-
 Next, we will paste the Public SSH key to access the site. Note that if you don't have a key, you can generate one using the "ssh-keygen" command and then display it with the command "cat ~/.ssh/id_rsa.pub".
 
 ![alt text](assets/ce-ssh-key.png)
 
-Finally, take one more look at the configuration and complete it by clicking the **Save and Exit** button.
+Finally, take one more look at the configuration and complete it by clicking the **Add Azure VNET Site** button.
 
 ![alt text](assets/ce-site-azure-8.png)
 
-The Status box for the VPC site object will display **Generated**. Click **Apply**. The Status field for the Azure VNET object changes to **Apply Planning**. Wait for the apply process to complete and the status to change to **Applied**.
+The Status box for the site object displays **Validation Succeeded**. So, click **Apply** in the Deployment column. First, the Status field for the Azure VNET object changes to **Applying**. Wait for the apply process to complete and the status to change to **Applied**.
 
 ![alt text](assets/ce-site-azure-9.png)
 
@@ -275,7 +264,7 @@ If the kiosk is deployed and running correctly, the **1/1** value will appear in
 
 ## Create branch-a namespace
 
-In order to connect the Retail Branches running in-store Kiosk on AppStack to the Recommendation Service using the HTTP LB, we first need to create a namespace for the HTTP LB. To do that, open the Service menu and navigate to the **Administration** service.
+In order to connect the Retail Branches running in-store Kiosk on App Stack to the Recommendation Service using the HTTP LB, we first need to create a namespace for the HTTP LB. To do that, open the Service menu and navigate to the **Administration** service.
 
 ![alt text](assets/namespace-branch-a-0.png)
 
@@ -302,8 +291,7 @@ In the **Name** field, enter a name for the new load balancer.
 
 ![alt text](assets/httplb-kiosk-2.png)
 
-Then proceed to the **Domains and LB Type** section and fill in the **kiosk.branch-a.buytime.internal** domain.
-Next, from the **Load Balancer Type** drop-down menu, select **HTTP** to create the HTTP type of load balancer. Specify the **80** port.
+Then proceed to the **Domains and LB Type** section and fill in the **kiosk.branch-a.buytime.internal** domain. Next, from the **Load Balancer Type** drop-down menu, select **HTTP** to create the HTTP type of load balancer. Make sure port **80** is specified.
 
 ![alt text](assets/httplb-kiosk-3.png)
 
@@ -331,7 +319,7 @@ Back on the Origin Pool page, type in the **8080** Origin server Port.
 
 ![alt text](assets/httplb-kiosk-9.png)
 
-Scroll down and click **Continue** to move on to apply the origin pool configuration.
+Scroll down and click **Add Origin Pool** to move on to apply the origin pool configuration.
 
 ![alt text](assets/httplb-kiosk-10.png)
 
@@ -347,7 +335,7 @@ Click **Add Item** to add the configuration.
 
 ![alt text](assets/httplb-kiosk-13.png)
 
-In the drop-down menu select **Site** as a place to advertise. Then select **Inside and Outside Network** for the site. And finally, select the created site as site reference. Click **Apply** to add the specified configuration.
+Make sure **Site** is as a place to advertise with **Inside and Outside Network**. Select the created earlier site as site reference. Click **Apply** to add the specified configuration.
 
 ![alt text](assets/httplb-kiosk-14.png)
 
@@ -355,7 +343,7 @@ Proceed by clicking **Apply**. This will apply the VIP Advertisement configurati
 
 ![alt text](assets/httplb-kiosk-15.png)
 
-Complete creating the load balancer by clicking the **Save and Exit** button.
+Complete creating the load balancer by clicking the **Add HTTP Load Balancer** button.
 
 ![alt text](assets/httplb-kiosk-16.png)
 
@@ -387,8 +375,7 @@ Open a browser window on your kiosk VM and proceed to the http://kiosk.branch-a.
 
 ## HTTP LB recommendations module
 
-In this part of Module 1 we are going to create an HTTP LB for the recommendation module of our app and then test it.
-To do that, go back to the F5 Console and click the **Add HTTP Load Balancer** button to open the creation form.
+In this part of Module 1 we are going to create an HTTP LB for the recommendation module of our app and then test it. To do that, go back to the Console and click the **Add HTTP Load Balancer** button to open the creation form.
 
 ![alt text](assets/httplb-recommendations-1.png)
 
@@ -396,7 +383,7 @@ In the **Name** field, enter a name for the new load balancer expressing its pur
 
 ![alt text](assets/httplb-recommendations-2.png)
 
-Then proceed to the **Domains and LB Type** section and fill in the **recommendations.branch-a.buytime.internal** domain. Next, from the **Load Balancer Type** drop-down menu, select **HTTP** to create the HTTP type of load balancer. Specify the **80** port.
+Then proceed to the **Domains and LB Type** section and fill in the **recommendations.branch-a.buytime.internal** domain. Next, from the **Load Balancer Type** drop-down menu, select **HTTP** to create the HTTP type of load balancer. Make sure port **80** is specified.
 
 ![alt text](assets/httplb-recommendations-3.png)
 
@@ -410,13 +397,13 @@ To create a new origin pool, open the **Origin Pool** menu and click **Add Item*
 
 Give origin pool a name.
 
-.. figure:: ./assets/httplb-recommendations_6.png
+![alt text](assets/httplb-recommendations_6.png)
 
 To create a new origin server, click **Add Item**.
 
 ![alt text](assets/httplb-recommendations-7.png)
 
-First, from the **Select Type of Origin Server** menu, select **Public DNS Name of Origin Server** to specify the origin server with DNS Name. To simplify the guide we provide you with demo server hosted on our cloud. Enter the **recommendations.buytime.sr.f5-cloud-demo.com** public IP and click **Apply**. If you want to use your own, there is k8s manifest or docker compose filed in the **deployments** folder.
+First, make sure **Public DNS Name of Origin Server** is selected to specify the origin server with DNS Name. To simplify the guide we provide you with demo server hosted on our cloud. Enter the **recommendations.buytime.sr.f5-cloud-demo.com** DNS name and click **Apply**. If you want to use your own, there is k8s manifest or docker compose file in the **deployments** folder.
 
 ![alt text](assets/httplb-recommendations-8.png)
 
@@ -424,7 +411,7 @@ Back on the **Origin Pool** page, leave the **443** Origin server Port. Make sur
 
 ![alt text](assets/httplb-recommendations-9.png)
 
-Scroll down, enable TLS and click **Continue** to move on to apply the origin pool configuration.
+Scroll down, enable **TLS** and click **Add Origin Pool** to move on to apply the origin pool configuration.
 
 ![alt text](assets/httplb-recommendations-10.png)
 
@@ -440,7 +427,7 @@ Click **Add Item** to add the configuration.
 
 ![alt text](assets/httplb-recommendations-13.png)
 
-In the drop-down menu select **Site** as a place to advertise. Then select **Inside and Outside Network** for the site. And finally, select the created site as site reference. Click **Apply** to add the specified configuration.
+Make sure **Inside and Outside Network** is specified for the site. Select the created site as site reference. Click **Apply** to add the specified configuration.
 
 ![alt text](assets/httplb-recommendations-14.png)
 
@@ -448,7 +435,7 @@ Proceed by clicking **Apply**. This will apply the VIP Advertisement configurati
 
 ![alt text](assets/httplb-recommendations-15.png)
 
-Complete creating the load balancer by clicking the **Save and Exit** button.
+Complete creating the load balancer by clicking the **Add HTTP Load Balancer** button.
 
 ![alt text](assets/httplb-recommendations-16.png)
 
@@ -471,6 +458,8 @@ Finally, go to the kiosk http://kiosk.branch-a.buytime.internal to see that the 
 In this Module we are going to use CE to deploy central DB (central inventory) & online App, as well as create and use TCP LB to securely connect to Retail Branch to enable order & inventory sync.
 
 ## Create buytime-online namespace
+
+TBD
 
 First of all, we will need to create a namespace for our online store to add our instances to. To do that, open the Service menu and navigate to the **Administration** service.
 
