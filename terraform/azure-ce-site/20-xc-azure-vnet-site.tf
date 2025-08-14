@@ -10,7 +10,7 @@ resource "volterra_cloud_credentials" "azure_cred" {
   name      = "azure-${var.environment}"
   namespace = "system"
   azure_client_secret {
-    client_id = azuread_application.auth.application_id
+    client_id = azuread_application.auth.client_id
     client_secret {
         clear_secret_info {
             url = "string:///${base64encode(azuread_service_principal_password.auth.value)}"
@@ -54,7 +54,6 @@ resource "volterra_azure_vnet_site" "site" {
     azure_certified_hw = "azure-byol-multi-nic-voltmesh"
     az_nodes {
       azure_az  = "1"
-      disk_size = "80"
       inside_subnet {
         subnet {
           subnet_name         = azurerm_subnet.subnet_a.name
