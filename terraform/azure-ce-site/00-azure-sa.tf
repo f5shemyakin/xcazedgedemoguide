@@ -93,6 +93,9 @@ resource "azuread_service_principal" "auth" {
 resource "azuread_service_principal_password" "auth" {
   service_principal_id = azuread_service_principal.auth.id
   end_date            = timeadd(timestamp(), "240h")
+  lifecycle { 
+    ignore_changes = [end_date] 
+  } 
 }
 
 data "azuread_client_config" "current" {}
